@@ -1,0 +1,5 @@
+com\ujjawal\firebaseconnect\dto\User.class
+com\ujjawal\firebaseconnect\services\firebaseservices.class
+com\ujjawal\firebaseconnect\services\firebaseConnection.class
+com\ujjawal\firebaseconnect\FirebaseconnectApplication.class
+com\ujjawal\firebaseconnect\Controller\RestController.class
