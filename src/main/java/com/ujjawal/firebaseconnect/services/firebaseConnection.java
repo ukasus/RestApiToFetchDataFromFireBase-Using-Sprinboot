@@ -1,22 +1,22 @@
 package com.ujjawal.firebaseconnect.services;
 
 import com.google.auth.oauth2.GoogleCredentials;
-import com.google.cloud.firestore.Firestore;
+
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.cloud.FirestoreClient;
+
+
+
+
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
+
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
+
 
 import javax.annotation.PostConstruct;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
+
 
 @Service
 public class firebaseConnection {
@@ -24,18 +24,31 @@ public class firebaseConnection {
     private Resource res;
 
     @PostConstruct
-    public void initiliaseFirebase()
+    public void initiliaseFirebase() throws IOException {
 
-    {
-          FileInputStream serviceAccount =
+        File file = File.createTempFile("data", ".json");
+
+
+
+
+
+
+
+        FileInputStream serviceAccount =
                 null;
         try {
 
+            InputStream initialStream=res.getInputStream();
+            byte[] buffer = new byte[initialStream.available()];
+            initialStream.read(buffer);
+
+            OutputStream outStream = new FileOutputStream(file);
+            outStream.write(buffer);
 
 
-            serviceAccount = new FileInputStream(res.getFile());
+            serviceAccount = new FileInputStream(file);
             FirebaseOptions options = new FirebaseOptions.Builder()
-                    .setCredentials(GoogleCredentials.fromStream(serviceAccount))
+                    .setCredentials(GoogleCredentials.fromStream(res.getInputStream()))
                     .setDatabaseUrl("https://springbootconnection-19188.firebaseio.com")
                     .build();
 

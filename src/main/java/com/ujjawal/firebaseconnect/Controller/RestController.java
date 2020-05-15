@@ -43,7 +43,7 @@ User user;
         return firebaseServices.getUserDetails(email);
     }
 
-    @RequestMapping(value = "/getUser" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/getUser")
     public List<User> getUsers() throws ExecutionException, InterruptedException {
         return firebaseServices.getUsers();
     }
