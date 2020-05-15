@@ -18,13 +18,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@Configuration
+@Service
 public class firebaseConnection {
     @Value("classpath:cdata.json")
     private Resource res;
 
-    @Bean
-    public Firestore initiliaseFirebase()
+    @PostConstruct
+    public void initiliaseFirebase()
 
     {
           FileInputStream serviceAccount =
@@ -43,7 +43,7 @@ public class firebaseConnection {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return FirestoreClient.getFirestore();
+
 
 
     }
