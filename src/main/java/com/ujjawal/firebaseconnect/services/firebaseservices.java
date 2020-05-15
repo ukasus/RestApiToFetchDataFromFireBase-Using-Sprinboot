@@ -4,6 +4,7 @@ import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.*;
 import com.google.firebase.cloud.FirestoreClient;
 import com.ujjawal.firebaseconnect.dto.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -14,16 +15,18 @@ import java.util.concurrent.ExecutionException;
 
 @Service
 public class firebaseservices {
+    @Autowired
+    Firestore dbFirestore;
 
 
     public String saveUserDetails(User person) throws InterruptedException, ExecutionException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+
         ApiFuture<WriteResult> collectionsApiFuture = dbFirestore.collection("persons").document(person.getEmail()).set(person);
         return collectionsApiFuture.get().getUpdateTime().toString();
     }
 
     public User getUserDetails(String email) throws InterruptedException, ExecutionException {
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+
         DocumentReference doc=dbFirestore.collection("persons").document(email);
         ApiFuture<DocumentSnapshot> docdata=doc.get();
         DocumentSnapshot document=docdata.get();
@@ -32,7 +35,7 @@ public class firebaseservices {
     }
     public List<User> getUsers() throws InterruptedException, ExecutionException {
         List<User> users=new ArrayList<>();
-        Firestore dbFirestore = FirestoreClient.getFirestore();
+
         CollectionReference coll=dbFirestore.collection("persons");
         ApiFuture<QuerySnapshot> query=coll.get();
         QuerySnapshot querySnapshot = query.get();
