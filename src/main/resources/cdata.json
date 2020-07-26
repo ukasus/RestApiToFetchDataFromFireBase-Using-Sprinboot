@@ -2,7 +2,7 @@
   "type": "service_account",
   "project_id": "springbootconnection-19188",
   "private_key_id": "fc4eb9e5e0499d46",
-  "private_key": ""
+  "private_key": "",
   "client_id": "11161943095668",
   "auth_uri": "https://accounts.google.com/o/oauth2/auth",
   "token_uri": "https://oauth2.googleapis.com/token",
